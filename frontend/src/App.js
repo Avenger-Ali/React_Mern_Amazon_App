@@ -1,35 +1,22 @@
-// import "./App.css";
-
-import data from "./data";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import HomeScreen                             from "./screens/HomeScreen";
+import ProductScreen                          from "./screens/ProductScreen";
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <a href="/">Amazon</a>
-      </header>
-      <main>
-        <h1>Featured Products</h1>
-        <div className="products">
-          {data.products.map((product) => (
-            <div className="product" key={product.slug}>
-              <a href={`/product/${product.slug}`}>
-                <img src={product.image} alt={product.name} />
-              </a>
-              <div className="product-info">
-                <a href={`/product/${product.slug}`}>
-                  <p>{product.name}</p>
-                </a>
-                <p>
-                  <strong>$</strong> {product.price}
-                </p>
-                <button>Add to Cart</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header>
+          <Link to="/">Amazon</Link>
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" exact element={<HomeScreen />} />
+            <Route path="/product/:slug" exact element={<ProductScreen />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
